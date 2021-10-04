@@ -37,3 +37,5 @@ git commit -m"demo-branch-1: added from branch-1"
 # Merge the two branches, causing a conflict
 git merge -m"Merged in demo-branch-2" demo-branch-2
 cat demo.mrg | ./read-automerge.js
+
+git checkout master
