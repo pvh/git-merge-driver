@@ -1,3 +1,3 @@
 [merge "automerge-driver"]
 	name = A custom driver used to merge binary automerge files. (.mrg) 
-	driver = my-merge-tool.sh %A %B %O
+	driver = node merge-automerge.js %A %B

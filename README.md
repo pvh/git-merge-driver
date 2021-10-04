@@ -1,10 +1,10 @@
 ---
-maintainer: praqma-thi
+maintainer: pvh
 ---
 
-# git-merge-driver
+# git-merge-driver-automerge
 
-This repository explains how to configure a custom merge driver in Git, allowing a custom tool to be run whenever certain files are caught in a merge conflict.
+This is a simple example of a git custom merge driver for automerge. It is derived from https://github.com/Praqma/git-merge-driver but any problems are my own fault.
 
 ## Demo
 
@@ -19,9 +19,9 @@ First up is defining the merge driver.
 This is done in the `.git/config` file:
 
 ```
-[merge "my-custom-driver"]
-	name = A custom merge driver used to resolve conflicts in certain files
-	driver = my-merge-tool.sh %O %A %B
+[merge "automerge-driver"]
+	name = A custom driver used to merge binary automerge files. (.mrg) 
+	driver = node merge-automerge.js %A %B
 ```
 
 The `merge` block contains the merge driver's identifier, used to reference the merge driver later.
@@ -29,7 +29,6 @@ The `merge` block contains the merge driver's identifier, used to reference the 
 The `name` property contains a description of the merge driver.
 
 The `driver` property contains the command that will be called when a conflict occurs. There's a handful of predefined parameters, most notably:
- - `%O`: ancestor’s version of the conflicting file
  - `%A`: current version of the conflicting file
  - `%B`: other branch's version of the conflicting file
 
