@@ -1,0 +1,12 @@
+{
+  "name": "git-merge-driver-automerge",
+  "version": "1.0.0",
+  "description": "an automerge git custom merge driver",
+  "main": "index.js",
+  "repository": "https://github.com/pvh/git-merge-driver-automerge",
+  "author": "Peter van Hardenberg <pvh@pvh.ca>",
+  "license": "MIT",
+  "dependencies": {
+    "automerge": "^1.0.1-preview.5"
+  }
+}
