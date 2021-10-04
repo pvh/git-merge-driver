@@ -9,13 +9,21 @@ const { argv } = require('process');
 // the placeholders `%A %B`
 // %A = tmp filepath to our version of the conflicted file
 // %B = tmp filepath to the other branches version of the file
-const ourFile = argv[1];
-const theirFile = argv[2];
+const ourFile = argv[2];
+const theirFile = argv[3];
+
+console.error(ourFile, theirFile)
 
 const ours = Automerge.load(fs.readFileSync(ourFile))
 const theirs = Automerge.load(fs.readFileSync(theirFile))
 
-const merged = Automerge.merge(ours, theirs)
+console.log("ours:", ours.text.join(''))
+console.log("theirs:", theirs.text.join(''))
+
+const changes = Automerge.getAllChanges(theirs);
+const [merged, patch] = Automerge.applyChanges(ours, changes)
+
+console.log("merged:", merged.text.join(''))
 
 // To resolve the conflict simply write to the current branch file
-fs.writeFileSync(ours, Automerge.save(merged, null, 2));
+fs.writeFileSync(ourFile, Automerge.save(merged), null, 2);

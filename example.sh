@@ -15,21 +15,25 @@ git branch -D demo-branch-2
 
 # Create 'my-file.mrg' on branch 1
 git checkout -b demo-branch-1
-./make-automerge.js | ./edit-automerge.js "hello" > demo.mrg
+./make-automerge.js | ./edit-automerge.js "hello" > demo2.mrg
+mv demo2.mrg demo.mrg
 git add demo.mrg
 git commit -m"demo-branch-1: added hello"
 
 git checkout -b demo-branch-2
+cat demo.mrg | ./edit-automerge.js " from branch-2" > demo2.mrg
+mv demo2.mrg demo.mrg
 cat demo.mrg | ./read-automerge.js
-cat demo.mrg | ./edit-automerge.js " from branch-2" > demo.mrg
 git add demo.mrg
 git commit -m"demo-branch-2: added from branch-2"
 
-#git checkout demo-branch-1
-#cat demo.mrg | ./edit-automerge.js " from branch-1" > demo.mrg
-#git add demo.mrg
-#git commit -m"demo-branch-2: added from branch-1"
+git checkout demo-branch-1
+cat demo.mrg | ./edit-automerge.js " from branch-1" > demo2.mrg
+mv demo2.mrg demo.mrg
+cat demo.mrg | ./read-automerge.js
+git add demo.mrg
+git commit -m"demo-branch-1: added from branch-1"
 
 # Merge the two branches, causing a conflict
-#git merge -m"Merged in demo-branch-2" demo-branch-2
-#cat demo.mrg | ./read-automerge.js
+git merge -m"Merged in demo-branch-2" demo-branch-2
+cat demo.mrg | ./read-automerge.js
