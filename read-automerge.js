@@ -4,7 +4,9 @@ const Automerge = require('automerge')
 
 const fs = require("fs");
 
-var data = fs.readFileSync(0);
+const { argv } = require('process');
+
+var data = fs.readFileSync(argv[1]);
 
 const doc = Automerge.load(data)
 

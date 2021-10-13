@@ -6,6 +6,8 @@ maintainer: pvh
 
 This is a simple example of a git custom merge driver for automerge. It is derived from https://github.com/Praqma/git-merge-driver but any problems are my own fault.
 
+Included in this repository is a not-very-promising approach to merging text files paired with more canonical .mrg files.
+
 ## Demo
 
 Run `example.sh` for a demonstration of the merge driver.
@@ -15,23 +17,8 @@ It will create a merge conflict in the repository, causing the merge driver to s
 
 ### git config
 
-First up is defining the merge driver.
-This is done in the `.git/config` file:
-
-```
-[merge "automerge-driver"]
-	name = A custom driver used to merge binary automerge files. (.mrg) 
-	driver = node merge-automerge.js %A %B
-```
-
-The `merge` block contains the merge driver's identifier, used to reference the merge driver later.
-
-The `name` property contains a description of the merge driver.
-
-The `driver` property contains the command that will be called when a conflict occurs. There's a handful of predefined parameters, most notably:
- - `%A`: current version of the conflicting file
- - `%B`: other branch's version of the conflicting file
-
+First up is defining the merge driversd.
+This is done via local git config. See `mergetool-setup.sh` for an example. Unfortunately, each user must run these commands in their own directory.
 
 For more, visit [git-scm.com - Git Attributes](https://git-scm.com/docs/gitattributes).
 
